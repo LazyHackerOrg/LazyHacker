@@ -1,4 +1,5 @@
 # Lazy Hacker
+[![Build Status](https://travis-ci.org/ainokila/LazyHacker.svg?branch=Ainokila)](https://travis-ci.org/ainokila/LazyHacker)
 
 This project pretends to offer a service similar to _metasploit_ which allows the user to scan a certain webpage looking for **vulnerabilities**. This tool is supposed to be user-friendly, in order to offer a  quick life-saver service for the ones who are not very related to security but even though concerned. 
 
