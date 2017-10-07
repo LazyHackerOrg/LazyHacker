@@ -6,12 +6,16 @@ class Scanner
 		UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
 	end
 
-	def self.subnet
+	def self.LocalSubnet
 		localIP.split(".")[0..2].push(0).join(".")
 	end
 
-	def self.Scan(target='all') 
-		target = subnet if target.eql? 'all'
+	def self.scan(target='all') 
+		if target.eql? 'all'
+			target = localIP.split(".")[0..2].push('*').join(".")
+		end
+
+		puts "Target: #{target}"
 
 		Nmap::Program.sudo_scan do |nmap|
 
@@ -56,9 +60,9 @@ class Scanner
 	end
 
 
-	private:
-	def subnet
-		localSubnet[0..-2]+"*"
+	private
+	def subnetscan
+		localIP.split(".")[0..2].push('*').join(".")
 	end
 
 end

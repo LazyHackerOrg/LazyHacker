@@ -1,40 +1,45 @@
 require 'nmap/xml'
 
-Host = Struct.new (:IP, :os)
-Service = Struct.new (:name, :version, :port, :protocol, :info)
+Host = Struct.new(:IP, :os)
+Service = Struct.new(:name, :version, :port, :protocol, :info)
 
 
 
 class Parser
 
-	def self.toJSON(file="scan.json")
+	def initialize(filename='./.scan_result.xml')
+		@data_map = {}
+		parse(filename)
+	end
+
+
+	def toJSON(file="scan.json")
 
 	end
 
-	def self.toCSV(file="scan.csv")
+	def toCSV(file="scan.csv")
 
 	end
 
-	def self.toMap
-
-	end
-
-	def self.print
-		data_map = parse()
-		data_map.each do |host, service_array|
+	def print
+		@data_map.each do |host, service_array|
+			puts '·'*45
 			puts "[#{host.IP}]::#{host.os}"
 			service_array.each do |service|
 				puts "#{service.name} - #{service.version} - #{service.port} - #{service.protocol} - #{service.info}"
+			end
 		end
-
 	end
 
-	private: 
+	def to_s
+		@data_map.to_s
+	end
 
-	def parse(file='./.scan_result')
-		data_map = {}
+	private
 
-		Nmap.XML.new(file) do |xml|
+	def parse(file)
+
+		Nmap::XML.new(file) do |xml|
 			xml.each_up_host do |host|
 				
 				# [IP, OS]
@@ -43,11 +48,11 @@ class Parser
 
 				host.each_port do |port|
 						# [nombre, version, puerto, protocolo, info]
-						a_service = Service.new( port.service.name,
-																		 port.service.version,
-																		 port.number,
-																		 port.protocol,
-																		 port.service.extra_info )
+						a_service = Service.new(port.service.name,
+												port.service.version,
+												port.number,
+												port.protocol,
+												port.service.extra_info )
 						services << a_service
 				end
 
@@ -55,9 +60,7 @@ class Parser
 
 			end
 		end
-		data_map
 	end 
-
 
 
 end
