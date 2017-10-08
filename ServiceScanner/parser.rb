@@ -1,4 +1,5 @@
 require 'nmap/xml'
+require 'json'
 
 Host = Struct.new(:IP, :os)
 Service = Struct.new(:name, :version, :port, :protocol, :info)
@@ -7,18 +8,16 @@ Service = Struct.new(:name, :version, :port, :protocol, :info)
 
 class Parser
 
+	attr_reader :data_map
+
 	def initialize(filename='./.scan_result.xml')
 		@data_map = {}
 		parse(filename)
 	end
 
 
-	def toJSON(file="scan.json")
-
-	end
-
-	def toCSV(file="scan.csv")
-
+	def to_json(file="scan.json")
+		JSON.generate(@data_map)
 	end
 
 	def print
