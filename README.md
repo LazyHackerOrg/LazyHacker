@@ -4,7 +4,7 @@ This project pretends to offer a service similar to _metasploit_ which allows th
 
 But remember! don't rely your proffesional software security in fast scanning, ask a proffesional!
 
-In the future we want to offer a higher scanning service with a curating tool for domains and certein organizations. **_Unsecure pages, beware!_**
+In the future we want to offer a higher scanning service with a curating tool for domains and certain organizations. **_Unsecure pages, beware!_**
 
 [![Made with HACKING and Open Source](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
